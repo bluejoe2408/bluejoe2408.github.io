@@ -1,0 +1,13 @@
+---
+import { SITE } from '../config/site';
+---
+<footer class="mt-24 border-t border-neutral-200 dark:border-neutral-800/80">
+  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-neutral-500 sm:flex-row sm:px-6 dark:text-neutral-500">
+    <span>© {new Date().getFullYear()} {SITE.author}</span>
+    <span class="flex gap-5">
+      <a href={SITE.social.github} class="transition-colors hover:text-accent-600 dark:hover:text-accent-400">GitHub</a>
+      <a href={`mailto:${SITE.social.email}`} class="transition-colors hover:text-accent-600 dark:hover:text-accent-400">Email</a>
+      <a href="/rss.xml" class="transition-colors hover:text-accent-600 dark:hover:text-accent-400">RSS</a>
+    </span>
+  </div>
+</footer>

@@ -1,0 +1,14 @@
+<button id="theme-toggle" aria-label="Toggle theme" class="flex h-8 w-8 items-center justify-center rounded-md text-base text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100">🌓</button>
+<script>
+  function bindThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.onclick = () => {
+      const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      document.documentElement.classList.toggle('dark', next === 'dark');
+    };
+  }
+  bindThemeToggle();
+  document.addEventListener('astro:page-load', bindThemeToggle);
+</script>

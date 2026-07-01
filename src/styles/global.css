@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, Monaco, "Cascadia Code", monospace;
+
+  /* Cool-blue accent scale (refined sky/blue) */
+  --color-accent-50: oklch(0.97 0.014 254);
+  --color-accent-100: oklch(0.932 0.032 255);
+  --color-accent-200: oklch(0.882 0.059 254);
+  --color-accent-300: oklch(0.809 0.105 252);
+  --color-accent-400: oklch(0.707 0.165 254);
+  --color-accent-500: oklch(0.623 0.214 259);
+  --color-accent-600: oklch(0.546 0.245 262);
+  --color-accent-700: oklch(0.488 0.243 264);
+  --color-accent-800: oklch(0.424 0.199 265);
+  --color-accent-900: oklch(0.379 0.146 265);
+
+  /* Refined neutrals — slightly off-white light, cool near-black dark */
+  --color-bg: oklch(0.992 0.002 248);
+  --color-bg-dark: oklch(0.178 0.007 264);
+  --color-surface: oklch(1 0 0);
+  --color-surface-dark: oklch(0.215 0.008 264);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-500);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  a {
+    transition: color 150ms ease;
+  }
+}
+
+/* Shiki dual-theme: swap to dark vars under .dark */
+html.dark .astro-code,
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}

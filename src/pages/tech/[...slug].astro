@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export async function getStaticPaths() {
+  const posts = await getCollection('tech');
+  return posts.map(p => ({ params: { slug: p.id }, props: { post: p } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="mx-auto max-w-2xl">
+    <header class="mb-10 border-b border-neutral-200 pb-8 dark:border-neutral-800">
+      <a href="/tech" class="text-sm font-medium text-accent-600 transition-colors hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300">← Tech</a>
+      <h1 class="mt-4 text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{post.data.title}</h1>
+      <p class="mt-3 font-mono text-sm text-neutral-500 dark:text-neutral-400">
+        <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-CA')}</time>
+      </p>
+    </header>
+    <div class="prose prose-neutral max-w-none dark:prose-invert
+      prose-headings:tracking-tight prose-headings:scroll-mt-24
+      prose-a:font-medium prose-a:text-accent-600 prose-a:no-underline hover:prose-a:underline dark:prose-a:text-accent-400
+      prose-code:rounded prose-code:bg-neutral-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-[0.85em] prose-code:font-normal prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-neutral-800
+      prose-pre:rounded-xl prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-neutral-50 prose-pre:text-sm dark:prose-pre:border-neutral-800 dark:prose-pre:bg-neutral-900
+      prose-pre:[&_code]:bg-transparent prose-pre:[&_code]:p-0
+      prose-blockquote:border-l-accent-500 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-neutral-400
+      prose-img:rounded-xl prose-img:border prose-img:border-neutral-200 dark:prose-img:border-neutral-800
+      prose-hr:border-neutral-200 dark:prose-hr:border-neutral-800">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

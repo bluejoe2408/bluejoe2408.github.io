@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Picture } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+export async function getStaticPaths() {
+  const trips = await getCollection('travel');
+  return trips.map(t => ({ params: { slug: t.id }, props: { trip: t } }));
+}
+const { trip } = Astro.props;
+const { Content } = await render(trip);
+---
+<BaseLayout title={trip.data.title} description={trip.data.description} image={trip.data.cover.src}>
+  <article class="prose dark:prose-invert max-w-none">
+    <h1>{trip.data.title}</h1>
+    <Picture src={trip.data.cover} alt={trip.data.title} widths={[768, 1440]} formats={['avif','webp']} fallbackFormat="jpg" class="w-full rounded-lg" />
+    <Content />
+    {trip.data.gallery && <Gallery images={trip.data.gallery} id={`gallery-${trip.id}`} />}
+  </article>
+</BaseLayout>

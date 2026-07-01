@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/Reveal.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { SITE } from '../config/site';
+import { NAV } from '../config/nav';
+import { getCollection } from 'astro:content';
+import { sortByDate, filterPublished, getFeatured } from '../lib/content';
+const featured = getFeatured(await getCollection('portfolio'));
+const latest = sortByDate(filterPublished(await getCollection('tech'))).slice(0, 3);
+const sections = NAV.filter(n => n.href !== '/');
+---
+<BaseLayout title={SITE.title}>
+  <section class="relative -mx-5 overflow-hidden px-5 py-24 text-center sm:-mx-6 sm:px-6 sm:py-32">
+    <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_55%_at_50%_0%,theme(colors.accent.500/0.10),transparent_70%)]"></div>
+    <div class="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(theme(colors.neutral.300/0.5)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_55%_45%_at_50%_30%,black,transparent_75%)] dark:[background-image:radial-gradient(theme(colors.neutral.700/0.5)_1px,transparent_1px)]"></div>
+    <span class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/60 px-3 py-1 text-xs font-medium text-neutral-600 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-400">
+      <span class="h-1.5 w-1.5 rounded-full bg-accent-500"></span>
+      Engineer
+    </span>
+    <h1 class="mt-6 text-5xl font-bold tracking-tight text-neutral-900 sm:text-6xl dark:text-neutral-50">{SITE.author}</h1>
+    <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-500 dark:text-neutral-400">{SITE.description}</p>
+  </section>
+
+  <Reveal>
+    <section class="py-10">
+      <h2 class="mb-5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">Explore</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {sections.map(s => (
+          <a href={s.href} class="group flex items-center justify-between rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-400/70 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-accent-500/50">
+            <span class="font-medium tracking-tight text-neutral-800 dark:text-neutral-100">{s.label}</span>
+            <span class="text-neutral-300 transition-all duration-200 group-hover:translate-x-1 group-hover:text-accent-500 dark:text-neutral-600">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </Reveal>
+
+  {featured.length > 0 && <Reveal><section class="py-10">
+    <h2 class="mb-5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">Highlights</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{featured.map(p => <ProjectCard project={p} />)}</div>
+  </section></Reveal>}
+
+  {latest.length > 0 && <Reveal><section class="py-10">
+    <h2 class="mb-5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">Latest Posts</h2>
+    <ul class="divide-y divide-neutral-200 dark:divide-neutral-800">{latest.map(p => <li><a href={`/tech/${p.id}`} class="group flex items-center justify-between py-3 transition-colors hover:text-accent-600 dark:hover:text-accent-400"><span class="font-medium">{p.data.title}</span><span class="text-neutral-300 transition-all duration-200 group-hover:translate-x-1 group-hover:text-accent-500 dark:text-neutral-600">→</span></a></li>)}</ul>
+  </section></Reveal>}
+</BaseLayout>

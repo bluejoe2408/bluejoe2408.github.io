@@ -1,0 +1,18 @@
+---
+interface Props { platform: 'youtube' | 'bilibili'; id: string; title?: string }
+const { platform, id, title = 'video' } = Astro.props;
+const src = platform === 'youtube'
+  ? `https://www.youtube-nocookie.com/embed/${id}`
+  : `https://player.bilibili.com/player.html?bvid=${id}&high_quality=1`;
+---
+<div class="lite-video relative aspect-video w-full cursor-pointer rounded bg-neutral-200 dark:bg-neutral-800" data-src={src} role="button" aria-label={title}>
+  <div class="absolute inset-0 flex items-center justify-center text-4xl">▶</div>
+</div>
+<script>
+  document.querySelectorAll('.lite-video').forEach(el => {
+    el.addEventListener('click', () => {
+      const src = el.getAttribute('data-src');
+      el.innerHTML = `<iframe class="absolute inset-0 h-full w-full" src="${src}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    }, { once: true });
+  });
+</script>

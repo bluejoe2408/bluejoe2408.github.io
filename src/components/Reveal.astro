@@ -1,0 +1,12 @@
+<div class="reveal opacity-0 translate-y-4 transition duration-700"><slot /></div>
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<script>
+  function initReveal() {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.remove('opacity-0','translate-y-4'); io.unobserve(e.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+</script>

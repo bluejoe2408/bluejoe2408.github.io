@@ -1,0 +1,32 @@
+---
+import { Picture, getImage } from 'astro:assets';
+interface Props { images: ImageMetadata[]; id: string }
+const { images, id } = Astro.props;
+// 灯箱打开的是经过优化的大图（webp, 最长边 1600），尺寸与 href 一致
+const large = await Promise.all(
+  images.map(img => getImage({ src: img, width: 1600, format: 'webp' }))
+);
+---
+<div id={id} class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+  {images.map((img, i) => (
+    <a href={large[i].src} data-pswp-width={large[i].attributes.width} data-pswp-height={large[i].attributes.height} target="_blank">
+      <Picture src={img} alt="" widths={[300, 600]} formats={['avif', 'webp']} fallbackFormat="jpg" loading="lazy" class="aspect-square w-full rounded object-cover" />
+    </a>
+  ))}
+</div>
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+  let lbs: PhotoSwipeLightbox[] = [];
+  const init = () => {
+    lbs.forEach(lb => lb.destroy());
+    lbs = [];
+    document.querySelectorAll('[id^="gallery-"]').forEach(el => {
+      const lb = new PhotoSwipeLightbox({ gallery: '#' + el.id, children: 'a', pswpModule: () => import('photoswipe') });
+      lb.init();
+      lbs.push(lb);
+    });
+  };
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

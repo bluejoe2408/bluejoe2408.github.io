@@ -1,0 +1,37 @@
+---
+import { NAV } from '../config/nav';
+import { SITE } from '../config/site';
+import ThemeToggle from './ThemeToggle.astro';
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+<header class="sticky top-0 z-50 border-b border-neutral-200/70 bg-neutral-50/80 backdrop-blur-md backdrop-saturate-150 dark:border-neutral-800/70 dark:bg-neutral-950/80">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5 sm:px-6">
+    <a href="/" class="group flex items-center gap-2 font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">
+      <span class="inline-block h-2.5 w-2.5 rounded-sm bg-accent-500 transition-transform duration-200 group-hover:rotate-45"></span>
+      {SITE.title}
+    </a>
+    <div class="flex items-center gap-5">
+      <ul class="hidden items-center gap-1 sm:flex">
+        {NAV.filter(i => i.href !== '/').map(i => (
+          <li><a href={i.href} class={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${isActive(i.href) ? 'text-accent-600 dark:text-accent-400' : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100'}`}>{i.label}</a></li>
+        ))}
+      </ul>
+      <ThemeToggle />
+      <button id="menu-btn" class="rounded-md p-1.5 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 sm:hidden dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+  <ul id="mobile-menu" class="hidden flex-col gap-1 border-t border-neutral-200/70 px-5 py-3 sm:hidden dark:border-neutral-800/70">
+    {NAV.map(i => <li><a href={i.href} class={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${isActive(i.href) ? 'text-accent-600 dark:text-accent-400' : 'text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800/60'}`}>{i.label}</a></li>)}
+  </ul>
+</header>
+<script>
+  function bindMenu() {
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (btn) btn.onclick = () => menu?.classList.toggle('hidden');
+  }
+  bindMenu();
+  document.addEventListener('astro:page-load', bindMenu);
+</script>
