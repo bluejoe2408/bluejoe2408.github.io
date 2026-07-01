@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="en" class="bg-neutral-50 font-sans dark:bg-neutral-950"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>rust学习笔记 · Gearless Joe</title><meta name="description" content="函数与控制流"><meta property="og:title" content="rust学习笔记 · Gearless Joe"><meta property="og:description" content="函数与控制流"><link rel="canonical" href="https://bluejoe2408.github.io/tech/rust_learning4/"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+      (function () {
+        function apply() {
+          var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.toggle('dark', t === 'dark');
+        }
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script><link rel="stylesheet" href="/_astro/BaseLayout.CdDrgdYZ.css"></head> <body class="min-h-screen bg-neutral-50 text-neutral-800 antialiased selection:bg-accent-500 selection:text-white dark:bg-neutral-950 dark:text-neutral-200"> <header class="sticky top-0 z-50 border-b border-neutral-200/70 bg-neutral-50/80 backdrop-blur-md backdrop-saturate-150 dark:border-neutral-800/70 dark:bg-neutral-950/80"> <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5 sm:px-6"> <a href="/" class="group flex items-center gap-2 font-semibold tracking-tight text-neutral-900 dark:text-neutral-50"> <span class="inline-block h-2.5 w-2.5 rounded-sm bg-accent-500 transition-transform duration-200 group-hover:rotate-45"></span> Gearless Joe </a> <div class="flex items-center gap-5"> <ul class="hidden items-center gap-1 sm:flex"> <li><a href="/tech" class="rounded-md px-3 py-1.5 text-sm font-medium transition-colors text-accent-600 dark:text-accent-400">Tech</a></li><li><a href="/travel" class="rounded-md px-3 py-1.5 text-sm font-medium transition-colors text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100">Travel</a></li><li><a href="/portfolio" class="rounded-md px-3 py-1.5 text-sm font-medium transition-colors text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100">Portfolio</a></li> </ul> <button id="theme-toggle" aria-label="Toggle theme" class="flex h-8 w-8 items-center justify-center rounded-md text-base text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100">🌓</button> <script type="module">function n(){const e=document.getElementById("theme-toggle");e&&(e.onclick=()=>{const t=document.documentElement.classList.contains("dark")?"light":"dark";localStorage.setItem("theme",t),document.documentElement.classList.toggle("dark",t==="dark")})}n();document.addEventListener("astro:page-load",n);</script> <button id="menu-btn" class="rounded-md p-1.5 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 sm:hidden dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100" aria-label="Menu">☰</button> </div> </nav> <ul id="mobile-menu" class="hidden flex-col gap-1 border-t border-neutral-200/70 px-5 py-3 sm:hidden dark:border-neutral-800/70"> <li><a href="/" class="block rounded-md px-3 py-2 text-sm font-medium transition-colors text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800/60">Home</a></li><li><a href="/tech" class="block rounded-md px-3 py-2 text-sm font-medium transition-colors text-accent-600 dark:text-accent-400">Tech</a></li><li><a href="/travel" class="block rounded-md px-3 py-2 text-sm font-medium transition-colors text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800/60">Travel</a></li><li><a href="/portfolio" class="block rounded-md px-3 py-2 text-sm font-medium transition-colors text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800/60">Portfolio</a></li> </ul> </header> <script type="module">function n(){const e=document.getElementById("menu-btn"),t=document.getElementById("mobile-menu");e&&(e.onclick=()=>t?.classList.toggle("hidden"))}n();document.addEventListener("astro:page-load",n);</script> <main class="mx-auto max-w-5xl px-5 py-10 sm:px-6"> <article class="mx-auto max-w-2xl"> <header class="mb-10 border-b border-neutral-200 pb-8 dark:border-neutral-800"> <a href="/tech" class="text-sm font-medium text-accent-600 transition-colors hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300">← Tech</a> <h1 class="mt-4 text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">rust学习笔记</h1> <p class="mt-3 font-mono text-sm text-neutral-500 dark:text-neutral-400"> <time datetime="2026-06-19T00:00:00.000Z">2026-06-19</time> </p> </header> <div class="prose prose-neutral max-w-none dark:prose-invert
+      prose-headings:tracking-tight prose-headings:scroll-mt-24
+      prose-a:font-medium prose-a:text-accent-600 prose-a:no-underline hover:prose-a:underline dark:prose-a:text-accent-400
+      prose-code:rounded prose-code:bg-neutral-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-[0.85em] prose-code:font-normal prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-neutral-800
+      prose-pre:rounded-xl prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-neutral-50 prose-pre:text-sm dark:prose-pre:border-neutral-800 dark:prose-pre:bg-neutral-900
+      prose-pre:[&_code]:bg-transparent prose-pre:[&_code]:p-0
+      prose-blockquote:border-l-accent-500 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-neutral-400
+      prose-img:rounded-xl prose-img:border prose-img:border-neutral-200 dark:prose-img:border-neutral-800
+      prose-hr:border-neutral-200 dark:prose-hr:border-neutral-800"> <h1 id="函数">函数</h1>
+<p>在Rust中，函数是组织代码的一个基本模块。前面几节中我们已经见过了Rust最重要的函数main函数，它是整个程序的入口。有了函数，我们就可以把代码逻辑片段封装在其中，从而提高代码的可读性和复用性。</p>
+<p>Rust中函数使用fn关键字来定义，例如：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn greet() {</span></span>
+<span class="line"><span>    println!("Welcome!");</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这里我们定义了一个函数greet。</p>
+<p>fn是函数定义的关键词，greet是函数名，后面的括号是可选参数列表，这里为空。接下来的大括号就是函数体的内容。</p>
+<h2 id="参数">参数</h2>
+<p>在定义函数的时候，可以给它加入参数。参数是函数签名的一部分。</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn say_hello(name: String) {</span></span>
+<span class="line"><span>    println!("Hello, {}", name);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这里我们定义了一个函数say_hello。这里的参数列表不为空，是一个String类型的name。</p>
+<p>Rust中的函数名一般使用snake_case（下划线分割的小写字母），例如这里的say_hello。</p>
+<p>我们可以通过下面的方式来调用前面定义的两个函数：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    greet();</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    let name = "Alice".to_string();</span></span>
+<span class="line"><span>    say_hello(name);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>greet函数参数列表为空。而say_hello需要提供一个String类型的参数，这里我们创建了一个String类型的name，将其传给say_hello函数。</p>
+<h2 id="返回值">返回值</h2>
+<p>Rust的函数可以返回一个值给它的调用方。不过在介绍返回值之前，需要插入两个概念的介绍——语句（statement）和表达式（expression）</p>
+<h3 id="语句和表达式">语句和表达式</h3>
+<p>语句通常表示执行一个动作，并且不会返回任何值。用let做变量绑定就是一个语句，例如：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let x = 1;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>函数的定义也是一个语句。例如上面的main函数定义，整体就是一个语句。
+刚才说了语句没有返回值，因此下面的写法是错误的：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let x = (let y = 2);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>let y = 2是一个语句，没有返回值，因此不能把x绑定上去。</p>
+<p>跟语句不同，表达式会求值，然后返回一个值。常见的表达式有下面几种情况：</p>
+<ol>
+<li>算术表达式：1+2是一个表达式，返回值是3。甚至3本身也是一个表达式</li>
+<li>函数调用：add(1, 2)也是一个表达式，因为函数会返回一个值。</li>
+<li>宏调用</li>
+<li>用花括号包裹的最终返回一个值的代码块</li>
+</ol>
+<p>关于上面的第四点，这里举个例子来说明：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    let result = {</span></span>
+<span class="line"><span>        let temp = z * 3;</span></span>
+<span class="line"><span>        temp - 1 </span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这里的result等号右侧的语句块如下：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    let temp = z * 3;</span></span>
+<span class="line"><span>    temp - 1</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这个语句块最后返回了temp - 1。注意这里的temp - 1后面没有分号。表达式最后不能有分号，一旦加上了分号，就会变成一个语句，而语句没有返回值。</p>
+<h3 id="返回值-1">返回值</h3>
+<p>说完语句和表达式，我们就可以正式介绍函数返回值了。首先来看怎么定义一个具有返回值的函数：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn add(a: i32, b: i32) -> i32 {</span></span>
+<span class="line"><span>    a + b</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let num1 = 5;</span></span>
+<span class="line"><span>    let num2 = 7;</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    let sum = add(num1, num2);</span></span>
+<span class="line"><span>    println!("The sum of {} and {} is {}.", num1, num2, sum);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>上面的例子中，我们定义了一个add函数，入参是两个i32类型的值a和b。接着我们使用了箭头符号-> ，后面跟的i32就是定义的返回值类型。在Rust中，函数的返回值是函数体的最后一个表达式的值。例如在上面的例子中，函数体最后一个表达式是a+b。因此add函数返回的就是a+b。 因此sum的值是a+b也就是12。</p>
+<p>当然，也可以在函数中使用return关键字来提前返回一个值，例如下面的代码：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn pass_exam(score: u32) -> bool {</span></span>
+<span class="line"><span>    if score &#x3C; 60 {</span></span>
+<span class="line"><span>        return false;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    true</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>在上述代码中，如果分数小于60分，会返回false。其他情况返回true。</p>
+<p>如果我们给上面add函数的末尾加上一个分号，会怎么样？考虑下面这段代码：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn add(a: i32, b: i32) -> i32 {</span></span>
+<span class="line"><span>    a + b;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let num1 = 5;</span></span>
+<span class="line"><span>    let num2 = 7;</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    let sum = add(num1, num2);</span></span>
+<span class="line"><span>    println!("The sum of {} and {} is {}.", num1, num2, sum);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>编译的话会得到下面的报错：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>error[E0308]: mismatched types</span></span>
+<span class="line"><span> --> src/main.rs:1:27</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>1 | fn add(a: i32, b: i32) -> i32 {</span></span>
+<span class="line"><span>  |    ---                    ^^^ expected `i32`, found `()`</span></span>
+<span class="line"><span>  |    |</span></span>
+<span class="line"><span>  |    implicitly returns `()` as its body has no tail or `return` expression</span></span>
+<span class="line"><span>2 |     a + b;</span></span>
+<span class="line"><span>  |          - help: remove this semicolon to return this value</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>For more information about this error, try `rustc --explain E0308`.</span></span>
+<span class="line"><span>error: could not compile `playground` due to previous error</span></span></code></pre>
+<p>报错显示，add函数期望的返回类型是i32，但是实际的返回的是()类型。由于我们给a+b加上了分号，它从表达式变成了语句。而语句没有返回值。另一方面，这也说明了如果一个函数没有返回值，那么其实会隐式的返回一个单元类型()。</p>
+<h1 id="控制流">控制流</h1>
+<p>控制流是编程语言的一个重要概念。程序员通过控制流可以控制哪些代码要执行。在Rust中，最常见的两种控制流结构是if表达式和循环。</p>
+<h2 id="if表达式">if表达式</h2>
+<p>if表达式会跟一个condition，来表示如果condition满足，就执行下面这段代码。if通常还会和else联用，从而当条件不满足的时候，就执行else后面的代码。基本的写法如下：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if condition {</span></span>
+<span class="line"><span>    // code to execute if the condition is true</span></span>
+<span class="line"><span>} else {</span></span>
+<span class="line"><span>    // code to execute if the condition is false</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>注意这里的condition必须是bool类型。如果是其他类型，会产生编译错误。</p>
+<p>if除了可以跟else联用，也可以在中间加入else if来形成多个条件判断。基本的写法如下：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if condition1 {</span></span>
+<span class="line"><span>    // code to execute if condition1 is true</span></span>
+<span class="line"><span>} else if condition2 {</span></span>
+<span class="line"><span>    // code to execute if condition1 is false and condition2 is true</span></span>
+<span class="line"><span>} else {</span></span>
+<span class="line"><span>    // code to execute if both conditions are false</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>如上面的注释所说，condition1为true时，会执行if后面代码块的代码；当condition1为false，condition2为true时，会执行else if后面代码块的代码；如果两个条件都是false，就会执行else的代码。</p>
+<p>需要注意的是，连续使用太多的else if并不是一个好的编程习惯。在后续的章节中，我们会介绍match这个结构来应对这种场景。</p>
+<p>正如这一小节的标题所说，if其实是一个表达式，具有返回值。既然如此，我们就可以写一个let语句来获取if表达式的值。</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let temperature = 20;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    let weather = if temperature >= 25 {</span></span>
+<span class="line"><span>        "hot"</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>        "cool"</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    println!("The weather today is {}.", weather);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>我们这里通过判断温度是否大于等于25度，来决定天气是冷还是热。上面的if else结构会根据temperature的实际值，返回”hot”或者”cool”。需要注意的是，if分支和else分支的返回值必须是同一类型。如果是不同类型，就会产生编译错误。我们对上面的代码稍作修改:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let temperature = 20;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    let weather = if temperature >= 25 {</span></span>
+<span class="line"><span>        "hot"</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>        25</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    println!("The weather today is {}.", weather);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这会产生下面的编译错误：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>error[E0308]: `if` and `else` have incompatible types</span></span>
+<span class="line"><span> --> src/main.rs:7:9</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>4 |       let weather = if temperature >= 25 {</span></span>
+<span class="line"><span>  |  ___________________-</span></span>
+<span class="line"><span>5 | |         "hot"</span></span>
+<span class="line"><span>  | |         ----- expected because of this</span></span>
+<span class="line"><span>6 | |     } else {</span></span>
+<span class="line"><span>7 | |         25</span></span>
+<span class="line"><span>  | |         ^^ expected `&#x26;str`, found integer</span></span>
+<span class="line"><span>8 | |     };</span></span>
+<span class="line"><span>  | |_____- `if` and `else` have incompatible types</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>For more information about this error, try `rustc --explain E0308`.</span></span>
+<span class="line"><span>error: could not compile `playground` due to previous error</span></span></code></pre>
+<p>报错中也明确说了，<code>if</code> and <code>else</code> have incompatible types。</p>
+<h2 id="循环">循环</h2>
+<p>除了if表达式之外，Rust中另一个重要的控制流结构是循环。循环会被用来多次执行同一段代码。Rust中提供了三种循环方式，loop，while，for。我们这里来一一介绍一下。</p>
+<h3 id="loop">loop</h3>
+<p>loop关键字会创建一个无限循环：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>loop {</span></span>
+<span class="line"><span>    // code to execute repeatedly</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>想要从循环中跳出，需要配合break关键词使用，例如：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>let mut counter = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>loop {</span></span>
+<span class="line"><span>    counter += 1;</span></span>
+<span class="line"><span>    if counter &#x3C; 5 {</span></span>
+<span class="line"><span>        continue;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    println!("Hello, world!");</span></span>
+<span class="line"><span>    if counter >= 5 {</span></span>
+<span class="line"><span>        break;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>上面的例子还展示了关键词continue的用法。它可以用来跳过接下来的代码，直接进入下一次循环。因此”Hello, world!”只会被打印一次。</p>
+<p>另一方面，loop循环还可以有返回值，例如：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let target = 10;</span></span>
+<span class="line"><span>    let mut sum = 0;</span></span>
+<span class="line"><span>    let mut counter = 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    let result = loop {</span></span>
+<span class="line"><span>        sum += counter;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if sum >= target {</span></span>
+<span class="line"><span>            break counter; // The value of counter will be returned from the loop as a result</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        counter += 1;</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    println!("The first number whose sum of all previous numbers is greater than or equal to {} is {}.", target, result);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>上面的例子中，当sum大于等于target时，counter就会作为loop的返回值，返回给result。</p>
+<h3 id="while">while</h3>
+<p>前面介绍的loop是一个无限循环，那么如果我想要像if那样加个条件呢？这时候可以使用while。用法如下：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while condition {</span></span>
+<span class="line"><span>    // code to execute while the condition is true</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>每次循环开始前，会检查condition是否为true。如果为true，循环就会执行。循环执行完一遍之后会再次检查condition的值，仍然为true就再次执行。如果循环下去，直到condition的值为false为止。</p>
+<p>需要注意的是，使用loop配合if，break等关键字也能实现相同的功能。但是用了while之后，程序会显得简洁很多。</p>
+<h3 id="for">for</h3>
+<p>Rust中还存在第三种循环方式：for。for循环通常用于访问集合，例如一个数组。考虑下面这个例子：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let numbers = [1, 2, 3, 4, 5];</span></span>
+<span class="line"><span>    let mut index = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    while index &#x3C; numbers.len() {</span></span>
+<span class="line"><span>        println!("The value is: {}", numbers[index]);</span></span>
+<span class="line"><span>        index += 1;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这段代码尝试使用while循环访问numbers数组，每个循环开始需要判断index是否达到了numbers.len()，每个循环内还需要对index自加1。如果改成for循环该怎么写呢？</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let numbers = [1, 2, 3, 4, 5];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    for number in numbers {</span></span>
+<span class="line"><span>        println!("The value is: {}", number);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>可以看到通过for循环的方式，就可以直接从数组内获取到number来使用了。比起手动去检查循环的条件，for循环的方式更不容易出错。</p>
+<p>for循环还能够对一个range进行循环，例如：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    for x in 1..=3 {</span></span>
+<span class="line"><span>        println!("x: {}", x);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这里的1..=3表示[1,3]这个区间的整数。如果是左闭右开，要写成1..3。</p>
+<p>这里还要提前卖个关子，等我们在下一节学习完了所有权和借用的相关知识之后，还会回头再来聊聊for循环的写法。</p>
+<h3 id="labels">labels</h3>
+<p>前面已经介绍了Rust中循环的三种方式loop，while，for，也介绍了break和continue关键词的使用。然后当循环存在嵌套关系时，break和continue只会对最内层的循环生效。但是有时候我们希望可以对外层的循环做break或者continue，这时该怎么办？幸运的是，Rust可以给循环加上标签，从而break和continue都可以直接操作标签。我们举例来说明：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let x = 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    'outer: loop {</span></span>
+<span class="line"><span>        let mut y = 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        'inner: loop {</span></span>
+<span class="line"><span>            if y == 3 {</span></span>
+<span class="line"><span>                y += 1;</span></span>
+<span class="line"><span>                continue 'inner; // Skips to the next iteration of the 'inner loop</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            println!("x: {}, y: {}", x, y);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            y += 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            if y > 5 {</span></span>
+<span class="line"><span>                break 'outer; // Breaks out of the 'outer loop</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>在本例中，我们创建了两层loop循环，并且分别用’outer和’inner来标记这两个循环。注意这里标签的语法，要用单引号’开头。在inner循环中，当y等于3时，会直接加一然后跳到下一次的inner循环。因此第13行的打印命令永远不会产生y为3的输出。当y的值大于5时，就会执行18行的break ‘outer直接跳出’outer这个循环。</p>
+<p>前面介绍过break可以带上返回值，这一点甚至可以与label一起使用。稍微修改下上面的例子：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    let x = 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    let z = 'outer: loop {</span></span>
+<span class="line"><span>        let mut y = 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        'inner: loop {</span></span>
+<span class="line"><span>            if y == 3 {</span></span>
+<span class="line"><span>                y += 1;</span></span>
+<span class="line"><span>                continue 'inner; // Skips to the next iteration of the 'inner loop</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            println!("x: {}, y: {}", x, y);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            y += 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            if y > 5 {</span></span>
+<span class="line"><span>                break 'outer y; // Breaks out of the 'outer loop</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>    println!("z: {}", z);</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这里的break ‘outer y，就会返回y的值赋给z。</p>
+<p>当然了，不只是loop可以添加label，另外两个关键字也是一样的，例如：</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fn main() {</span></span>
+<span class="line"><span>    'outer: for x in 1..=3 {</span></span>
+<span class="line"><span>        for y in 1..=5 {</span></span>
+<span class="line"><span>            if y == 3 {</span></span>
+<span class="line"><span>                continue 'outer; // Skips the current iteration of the 'outer loop</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            if x == 2 &#x26;&#x26; y == 4 {</span></span>
+<span class="line"><span>                break 'outer; // Breaks out of the 'outer loop</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            println!("x: {}, y: {}", x, y);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre> </div> </article> </main> <footer class="mt-24 border-t border-neutral-200 dark:border-neutral-800/80"> <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-neutral-500 sm:flex-row sm:px-6 dark:text-neutral-500"> <span>© 2026 Chen Jian</span> <span class="flex gap-5"> <a href="https://github.com/bluejoe2408" class="transition-colors hover:text-accent-600 dark:hover:text-accent-400">GitHub</a> <a href="mailto:bluejoe2408@gmail.com" class="transition-colors hover:text-accent-600 dark:hover:text-accent-400">Email</a> <a href="/rss.xml" class="transition-colors hover:text-accent-600 dark:hover:text-accent-400">RSS</a> </span> </div> </footer> </body></html>
